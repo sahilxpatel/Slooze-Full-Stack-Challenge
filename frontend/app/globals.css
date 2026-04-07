@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7efe4;
+  --foreground: #132228;
+  --panel: #fffdf8;
+  --accent: #0f766e;
+  --accent-dark: #115e59;
+  --danger: #be123c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-ibm-plex-mono);
+}
+
+body {
+  min-height: 100vh;
+  color: var(--foreground);
+  background:
+    radial-gradient(circle at 100% 0%, #ffd7a8 0%, transparent 46%),
+    radial-gradient(circle at 0% 100%, #b6eadf 0%, transparent 42%),
+    var(--background);
+}
+
+.hero {
+  background: linear-gradient(140deg, #fffdf8 0%, #fff4de 52%, #ecfbf7 100%);
+  border: 1px solid #e7ddce;
+  box-shadow: 0 15px 40px rgba(24, 24, 27, 0.08);
+}
+
+.panel {
+  border-radius: 1rem;
+  border: 1px solid #eadcc7;
+  background: var(--panel);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-bottom: 1px solid #efe4d4;
+  padding: 1rem;
+}
+
+.panel-header h2 {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.card {
+  border-radius: 0.9rem;
+  border: 1px solid #efe5d6;
+  background: #fffcf6;
+  padding: 0.9rem;
+}
+
+.menu-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.6rem;
+  background: #f8f3ea;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.92rem;
+}
+
+.btn,
+.btn-secondary,
+.btn-danger {
+  cursor: pointer;
+  border-radius: 0.6rem;
+  border: 0;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: transform 0.12s ease, opacity 0.2s ease;
+}
+
+.btn:hover,
+.btn-secondary:hover,
+.btn-danger:hover {
+  transform: translateY(-1px);
+}
+
+.btn {
+  background: var(--accent);
+  color: #f8fffd;
+}
+
+.btn:hover {
+  background: var(--accent-dark);
+}
+
+.btn-secondary {
+  border: 1px solid #c6d9d5;
+  background: #e7f5f2;
+  color: #0f4e48;
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff1f4;
+}
+
+.badge {
+  border-radius: 999px;
+  background: #e7f5f2;
+  color: #0f5c56;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
