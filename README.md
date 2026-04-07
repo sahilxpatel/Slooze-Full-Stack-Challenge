@@ -8,7 +8,7 @@ Role-based food ordering application with country-scoped access control.
 
 This project implements the Slooze assignment using:
 
-- Backend: NestJS, GraphQL, Prisma, SQLite
+- Backend: NestJS, GraphQL, Prisma, PostgreSQL
 - Frontend: Next.js (App Router), TypeScript, Tailwind CSS, Apollo Client
 - Access model: RBAC (Admin, Manager, Member) + country-scoped ReBAC (India, America)
 

@@ -10,7 +10,9 @@ async function main() {
   await prisma.restaurant.deleteMany();
   await prisma.user.deleteMany();
 
-  await prisma.$executeRawUnsafe('DELETE FROM sqlite_sequence;');
+  await prisma.$executeRawUnsafe(
+    'TRUNCATE TABLE "OrderItem", "Order", "PaymentMethod", "MenuItem", "Restaurant", "User" RESTART IDENTITY CASCADE;',
+  );
 
   const nick = await prisma.user.create({
     data: { name: 'Nick Fury', role: Role.ADMIN },
