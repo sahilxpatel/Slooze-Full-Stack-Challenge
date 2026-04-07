@@ -148,7 +148,3 @@ npm run dev
 npm run build
 ```
 
-## Deployment Notes
-
-- Frontend can be deployed directly on Vercel.
-- Backend is currently a long-running Nest server with SQLite, so it is better deployed on Render (or migrated to Postgres + serverless architecture for full Vercel hosting).
