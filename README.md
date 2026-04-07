@@ -12,6 +12,11 @@ This project implements the Slooze assignment using:
 - Frontend: Next.js (App Router), TypeScript, Tailwind CSS, Apollo Client
 - Access model: RBAC (Admin, Manager, Member) + country-scoped ReBAC (India, America)
 
+## Live Deployment
+
+- Frontend (Vercel): https://slooze-full-stack-challenge.vercel.app/
+- Backend (Render): https://slooze-full-stack-challenge.onrender.com/graphql
+
 ## Feature Access Matrix
 
 | Feature | Admin | Manager | Member |
