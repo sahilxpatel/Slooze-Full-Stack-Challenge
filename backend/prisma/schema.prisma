@@ -1,0 +1,91 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  MEMBER
+}
+
+enum Country {
+  INDIA
+  AMERICA
+}
+
+enum OrderStatus {
+  DRAFT
+  PLACED
+  CANCELED
+}
+
+model User {
+  id             Int             @id @default(autoincrement())
+  name           String
+  role           Role
+  country        Country?
+  paymentMethods PaymentMethod[]
+  orders         Order[]
+}
+
+model Restaurant {
+  id        Int        @id @default(autoincrement())
+  name      String
+  country   Country
+  menuItems MenuItem[]
+  orders    Order[]
+}
+
+model MenuItem {
+  id           Int         @id @default(autoincrement())
+  name         String
+  price        Float
+  restaurantId Int
+  restaurant   Restaurant  @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  orderItems   OrderItem[]
+}
+
+model PaymentMethod {
+  id     Int    @id @default(autoincrement())
+  label  String
+  type   String
+  last4  String
+  userId Int
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Order {
+  id              Int          @id @default(autoincrement())
+  status          OrderStatus  @default(DRAFT)
+  total           Float        @default(0)
+  country         Country
+  userId          Int
+  restaurantId    Int
+  paymentMethodId Int?
+  createdAt       DateTime     @default(now())
+  user            User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  restaurant      Restaurant   @relation(fields: [restaurantId], references: [id], onDelete: Restrict)
+  items           OrderItem[]
+}
+
+model OrderItem {
+  id        Int      @id @default(autoincrement())
+  orderId   Int
+  menuItemId Int
+  quantity  Int
+  unitPrice Float
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItem  MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Restrict)
+
+  @@unique([orderId, menuItemId])
+}

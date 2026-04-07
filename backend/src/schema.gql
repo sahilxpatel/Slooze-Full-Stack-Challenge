@@ -1,0 +1,135 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserType {
+  id: ID!
+  name: String!
+  role: Role!
+  country: Country
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  MEMBER
+}
+
+enum Country {
+  INDIA
+  AMERICA
+}
+
+type MenuItemType {
+  id: ID!
+  name: String!
+  price: Float!
+  restaurantId: Int!
+}
+
+type RestaurantType {
+  id: ID!
+  name: String!
+  country: Country!
+  menuItems: [MenuItemType!]!
+}
+
+type PaymentMethodType {
+  id: ID!
+  label: String!
+  type: String!
+  last4: String!
+}
+
+type OrderItemType {
+  id: ID!
+  menuItemId: Int!
+  quantity: Int!
+  unitPrice: Float!
+  subtotal: Float!
+  menuItem: MenuItemType!
+}
+
+type OrderType {
+  id: ID!
+  status: OrderStatus!
+  total: Float!
+  country: Country!
+  userId: Int!
+  restaurantId: Int!
+  paymentMethodId: Int
+  createdAt: DateTime!
+  restaurant: RestaurantType!
+  items: [OrderItemType!]!
+}
+
+enum OrderStatus {
+  DRAFT
+  PLACED
+  CANCELED
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  me: UserType!
+  users: [UserType!]!
+  restaurants: [RestaurantType!]!
+  orders: [OrderType!]!
+  paymentMethods: [PaymentMethodType!]!
+}
+
+type Mutation {
+  createOrder(input: CreateOrderInput!): OrderType!
+  addItemToOrder(input: AddItemInput!): OrderType!
+  removeItemFromOrder(input: RemoveItemInput!): OrderType!
+  checkoutOrder(input: CheckoutInput!): OrderType!
+  cancelOrder(input: CancelOrderInput!): OrderType!
+  addPaymentMethod(input: AddPaymentMethodInput!): PaymentMethodType!
+  updatePaymentMethod(input: UpdatePaymentMethodInput!): PaymentMethodType!
+  deletePaymentMethod(input: DeletePaymentMethodInput!): PaymentMethodType!
+}
+
+input CreateOrderInput {
+  restaurantId: Int!
+}
+
+input AddItemInput {
+  orderId: Int!
+  menuItemId: Int!
+  quantity: Int!
+}
+
+input RemoveItemInput {
+  orderId: Int!
+  menuItemId: Int!
+}
+
+input CheckoutInput {
+  orderId: Int!
+  paymentMethodId: Int!
+}
+
+input CancelOrderInput {
+  orderId: Int!
+}
+
+input AddPaymentMethodInput {
+  label: String!
+  type: String!
+  last4: String!
+}
+
+input UpdatePaymentMethodInput {
+  paymentMethodId: Int!
+  label: String!
+  type: String!
+  last4: String!
+}
+
+input DeletePaymentMethodInput {
+  paymentMethodId: Int!
+}
